@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>📊 Dashboard Analytics</h2>
+
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+    <canvas id="barChart"></canvas>
+    <canvas id="pieChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+fetch('/stats')
+.then(res => res.json())
+.then(data => {
+
+    // BAR CHART
+    new Chart(document.getElementById('barChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Tasks','Jobs','Materials','Electricians'],
+            datasets: [{
+                label: 'System Data',
+                data: [data.tasks, data.jobs, data.materials, data.electricians]
+            }]
+        }
+    });
+
+    // PIE CHART
+    new Chart(document.getElementById('pieChart'), {
+        type: 'pie',
+        data: {
+            labels: ['Tasks','Jobs','Materials','Electricians'],
+            datasets: [{
+                data: [data.tasks, data.jobs, data.materials, data.electricians]
+            }]
+        }
+    });
+
+});
+</script>
+
+{% endblock %}

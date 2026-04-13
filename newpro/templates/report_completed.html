@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>✅ Completed Tasks Report</h2>
+
+{% for t in data %}
+<div class="card">
+<b>{{t.description}}</b><br>
+Job: {{t.job.title}}<br>
+Electrician: {{t.electrician.name}}
+</div>
+{% endfor %}
+
+{% endblock %}
