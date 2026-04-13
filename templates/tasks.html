@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Tasks</h2>
+
+<form method="POST">
+
+<input name="desc" placeholder="Task" required>
+
+<select id="statusFilter" onchange="filterTasks()">
+    <option>All</option>
+    <option>Pending</option>
+    <option>In Progress</option>
+    <option>Completed</option>
+</select>
+
+<select name="job">
+{% for j in jobs %}
+<option value="{{j.id}}">{{j.title}}</option>
+{% endfor %}
+</select>
+
+<select name="electrician">
+{% for e in electricians %}
+<option value="{{e.id}}">{{e.name}}</option>
+{% endfor %}
+</select>
+
+<button>Add Task</button>
+</form>
+
+<input type="text" id="searchTask" class="search-box"
+placeholder="🔍 Search tasks..."
+onkeyup="searchItems('searchTask','card')">
+
+<div class="cards task-cards">
+{% for t in data %}
+<div class="card task-card" data-status="{{t.status}}">
+    <b>{{t.description}}</b><br>
+    Status: {{t.status}}<br>
+    Job: {{t.job.title}}<br>
+    Electrician: {{t.electrician.name}}<br>
+
+    <a href="/delete/task/{{t.id}}" style="color:red;">🗑 Delete</a>
+        <a href="/edit/task/{{t.id}}"><button>✏ Edit</button></a>
+
+</div>
+{% endfor %}
+
+{% endblock %}

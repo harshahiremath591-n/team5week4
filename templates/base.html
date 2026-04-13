@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Electrician System</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="navbar">
+
+    <a href="/dashboard" class="nav-item active">
+        <span>🏠</span>
+        <small>Dashboard</small>
+    </a>
+
+    <a href="/tasks" class="nav-item">
+        <span>📋</span>
+        <small>Tasks</small>
+    </a>
+
+    <a href="/jobs" class="nav-item">
+        <span>💼</span>
+        <small>Jobs</small>
+    </a>
+
+    <a href="/materials" class="nav-item">
+        <span>🧰</span>
+        <small>Materials</small>
+    </a>
+
+    <a href="/electricians" class="nav-item">
+        <span>👷</span>
+        <small>Electricians</small>
+    </a>
+
+    <a href="/report/daily" class="nav-item">
+        <span>📅</span>
+        <small>Daily</small>
+    </a>
+
+    <a href="/report/weekly" class="nav-item">
+        <span>📆</span>
+        <small>Weekly</small>
+    </a>
+
+    <a href="/report/monthly" class="nav-item">
+        <span>🗓</span>
+        <small>Monthly</small>
+    </a>
+
+    <a href="/logout" class="nav-item">
+        <span>🚪</span>
+        <small>Logout</small>
+    </a>
+
+    <!-- 👤 PROFILE -->
+    {% if user %}
+<div class="profile">
+    <img src="https://ui-avatars.com/api/?name={{ user.username }}&background=random&color=fff">
+    <span>{{ user.username }}</span>
+</div>
+{% endif %}
+
+</div>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

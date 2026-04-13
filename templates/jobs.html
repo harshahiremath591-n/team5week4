@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Jobs</h2>
+
+<form method="POST">
+<input name="title" placeholder="Title" required>
+<input name="location" placeholder="Location" required>
+<input name="deadline" placeholder="Deadline" required>
+<input type="text" id="searchJob" class="search-box"
+placeholder="🔍 Search jobs..."
+onkeyup="searchItems('searchJob','card')">
+
+<select name="electrician">
+{% for e in electricians %}
+<option value="{{e.id}}">{{e.name}}</option>
+{% endfor %}
+</select>
+
+<button>Add Job</button>
+</form>
+
+<div class="cards job-cards">
+{% for j in data %}
+<div class="card job-card">
+    <b>{{j.title}}</b><br>
+    📍 {{j.location}}<br>
+    📅 {{j.deadline}}<br>
+    👷 {{j.electrician.name}}<br>
+
+    <a href="/delete/job/{{j.id}}" style="color:red;">Delete</a>
+    <a href="/edit/job/{{j.id}}"><button>✏ Edit</button></a>
+</div>
+
+{% endfor %}
+
+{% endblock %}

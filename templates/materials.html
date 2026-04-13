@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Materials</h2>
+
+<form method="POST">
+<input name="name" placeholder="Material" required>
+<input name="qty" type="number" placeholder="Quantity" required>
+<input type="text" id="searchMaterial" class="search-box"
+placeholder="🔍 Search materials..."
+onkeyup="searchItems('searchMaterial','card')">
+<button>Add</button>
+</form>
+
+{% for m in data %}
+<div class="card material-card">
+    {{m.name}} - Qty: {{m.quantity}}
+
+    <a href="/delete/material/{{m.id}}" style="color:red;">Delete</a>
+    <a href="/edit/material/{{m.id}}"><button>✏ Edit</button></a>
+</div>
+{% endfor %}
+
+{% endblock %}

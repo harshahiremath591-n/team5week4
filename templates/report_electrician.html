@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>👷 Electrician Activity Report</h2>
+
+{% for e in data %}
+<div class="card">
+<b>{{e.name}}</b> ({{e.phone}})
+
+<ul>
+{% for t in e.tasks %}
+<li>{{t.description}} - {{t.status}}</li>
+{% endfor %}
+</ul>
+
+</div>
+{% endfor %}
+
+{% endblock %}

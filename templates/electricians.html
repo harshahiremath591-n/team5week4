@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Electricians</h2>
+
+<form method="POST">
+<input name="name" placeholder="Name" required>
+<input name="phone" placeholder="Phone" required>
+<input type="text" id="searchElectrician" class="search-box"
+placeholder="🔍 Search electricians..."
+onkeyup="searchItems('searchElectrician','card')">
+<button>Add</button>
+</form>
+
+{% for e in data %}
+<div class="card electrician-card">
+    {{e.name}} - {{e.phone}}
+
+    <br>
+    <a href="/edit/electrician/{{e.id}}"><button>✏ Edit</button></a>
+    <a href="/delete/electrician/{{e.id}}"><button>🗑 Delete</button></a>
+</div>
+{% endfor %}
+
+{% endblock %}

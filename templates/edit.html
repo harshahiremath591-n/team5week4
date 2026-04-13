@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>✏ Edit {{type}}</h2>
+
+<form method="POST">
+
+{% if type == 'task' %}
+<input name="desc" value="{{item.description}}" required>
+<select name="status">
+    <option {{'selected' if item.status=='Pending'}}>Pending</option>
+    <option {{'selected' if item.status=='In Progress'}}>In Progress</option>
+    <option {{'selected' if item.status=='Completed'}}>Completed</option>
+</select>
+
+{% elif type == 'job' %}
+<input name="title" value="{{item.title}}" required>
+<input name="location" value="{{item.location}}" required>
+
+{% elif type == 'material' %}
+<input name="name" value="{{item.name}}" required>
+<input name="qty" value="{{item.quantity}}" required>
+
+{% elif type == 'electrician' %}
+<input name="name" value="{{item.name}}" required>
+<input name="phone" value="{{item.phone}}" required>
+{% endif %}
+
+<button type="submit">💾 Update</button>
+
+</form>
+{% endblock %}
