@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>📅 Daily Report</h2>
+
+<!-- DATE FILTER -->
+<form method="GET">
+    <input type="date" name="date">
+    <button>Filter</button>
+</form>
+
+<!-- PDF BUTTON -->
+<a href="/report/pdf?date={{request.args.get('date')}}">
+    <button>📥 Download Filtered PDF</button>
+</a>
+
+<canvas id="reportChart"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+fetch('/stats')
+.then(res => res.json())
+.then(data => {
+    new Chart(document.getElementById('reportChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Tasks','Jobs','Materials','Electricians'],
+            datasets: [{
+                label: 'Report Data',
+                data: [data.tasks, data.jobs, data.materials, data.electricians]
+            }]
+        }
+    });
+});
+</script>
+
+{% for t in data %}
+<div class="card">
+<b>{{t.description}}</b><br>
+Status: {{t.status}}<br>
+Job: {{t.job.title}}<br>
+Electrician: {{t.electrician.name}}
+</div>
+{% endfor %}
+
+{% endblock %}
